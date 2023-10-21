@@ -19,8 +19,9 @@ resource "aws_instance" "windows_server" {
 
   tags = {
     Name = "Example_TerraformServer"
-  }
 
+  }
+  vpc_security_group_ids = [aws_security_group.Domain.id]
 }
 
 resource "aws_security_group" "Domain" {
