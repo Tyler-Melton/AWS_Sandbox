@@ -13,17 +13,19 @@ provider "aws" {
   region = "us-east-1"
 }
 
+#Windows Server 2022 Domain Controller 
 resource "aws_instance" "windows_server" {
   ami           = "ami-005f8adf84f8c5057"
   instance_type = "t2.micro"
 
   tags = {
-    Name = "Example_TerraformServer"
+    Name = "Domain_Controller"
 
   }
   vpc_security_group_ids = [aws_security_group.Domain.id]
 }
 
+#Red Hat Enterprise Linux Ansible Server
 resource "aws_instance" "rhel_server" {
   ami           = "ami-026ebd4cfe2c043b2"
   instance_type = "t2.micro"
@@ -34,6 +36,7 @@ resource "aws_instance" "rhel_server" {
   vpc_security_group_ids = [aws_security_group.Domain.id]
 }
 
+#Security Group for Servers
 resource "aws_security_group" "Domain" {
   name    = "Servers"
   ingress = []
