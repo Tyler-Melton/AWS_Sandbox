@@ -33,7 +33,9 @@ resource "aws_instance" "rhel_server" {
   tags = {
     name = "Ansible_Server"
   }
+
   vpc_security_group_ids = [aws_security_group.Domain.id]
+  user_data              = file("${path.module}/Ansible_Download.sh")
 }
 
 #Security Group for Servers
